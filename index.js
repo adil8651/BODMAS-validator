@@ -11,6 +11,8 @@ function isBoadmas(eq) {
   let str = 0;
   let hop = 0;
   let brf = 0;
+  let wrong = false;
+  let brjust = 0;
 
   for (let e of eqa) {
     if (!opa.includes(e) && countOp > 0 && countOp < 2) {
@@ -19,7 +21,7 @@ function isBoadmas(eq) {
       countOp++;
     }
 
-    if (["*", "/"].includes(e) && hop <= 1 && brf === 0 && eqa.indexOf(e) > 0) {
+    if (["*", "/"].includes(e) && hop <= 1 && brf === 0) {
       hop++;
     } else if (!["*", "/"].includes(e) && hop > 0) {
       hop--;
@@ -44,10 +46,22 @@ function isBoadmas(eq) {
       countOp++;
     }
 
+    if (["*", "/"].includes(e) && eqa.indexOf(e) === 0) {
+      wrong = true;
+    }
+
+    if (e === bra[0] && brjust === 0) {
+      brjust++;
+    } else if (brjust > 0 && !["*", "/"].includes(e) && brjust < 2) {
+      brjust--;
+    } else if (brjust > 0 && ["*", "/"].includes(e)) {
+      brjust++;
+    }
+
     console.log(hop, str, brf);
   }
 
-  if (countOp > 0 || countBr > 0) {
+  if (countOp > 0 || countBr > 0 || wrong || brjust) {
     return false;
   } else {
     return true;

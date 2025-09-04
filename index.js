@@ -14,7 +14,10 @@ function isBoadmas(eq) {
   let wrong = false;
   let brjust = 0;
 
-  for (let e of eqa) {
+  for (let [i, e] of eqa.entries()) {
+    if (opa.includes(e) && bra[1] === eqa[i + 1]) {
+      wrong = true;
+    }
     if (!opa.includes(e) && countOp > 0 && countOp < 2) {
       countOp--;
     } else if (opa.includes(e) && hop === 0) {

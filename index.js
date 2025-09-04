@@ -61,7 +61,7 @@ function isBoadmas(eq) {
     console.log(hop, str, brf);
   }
 
-  if (countOp > 0 || countBr > 0 || wrong || brjust) {
+  if (countOp > 0 || countBr === 0 || wrong || brjust) {
     return false;
   } else {
     return true;
